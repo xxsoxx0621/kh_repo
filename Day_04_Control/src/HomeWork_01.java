@@ -19,7 +19,7 @@ public class HomeWork_01 {
 			 j += i;
 			
 		}
-		System.out.println("1 ~ " + num +"까지의 합은" + j + "입니다.");
+		System.out.println("1 ~ " + num +"까지의 합은 " + j + " 입니다.");
 		
 		}
 	}
