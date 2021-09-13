@@ -6,7 +6,9 @@ public class Quiz_04_upNDown1 {
 		// TODO Auto-generated method stub
 
 		// UP & DOWN 게임 다시 만들기
-		
+		// 인공지능 테스트 
+		// 1. 컴퓨터 스스로 값을 잘 찾아가는지
+		// 2. 사용자가 잘못 입력한 값에 속지 않는지
 		Scanner sc = new Scanner(System.in);
 		int menu = 0;
 		while(true) {
