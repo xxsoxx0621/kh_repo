@@ -103,7 +103,7 @@ public class Challenge_01 {
 
 			// 정렬은 했으니까 이제 한타임 돌때마다 비교를 해야함
 
-			for(int i = 0; i < winNum.length; i++ ) { // 0 0, 0 1 , 0 2, 0 3, 0 4 0,5
+			for(int i = 0; i < winNum.length; i++ ) { 
 
 				for(int j =0 ; j < winNum.length ; j++) {
 					if(winNum[i] == oneByone[j]) {
