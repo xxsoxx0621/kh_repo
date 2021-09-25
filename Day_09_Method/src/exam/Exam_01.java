@@ -1,3 +1,5 @@
+package exam;
+
 
 public class Exam_01 { // Startup 기업 Exam_01 이라고 가정
 	// return 데이터 타입

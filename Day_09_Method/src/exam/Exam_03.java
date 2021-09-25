@@ -1,3 +1,5 @@
+package exam;
+
 
 public class Exam_03 {
 
