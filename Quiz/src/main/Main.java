@@ -3,9 +3,8 @@ package main;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-import stduentmanagers.StudentManagers;
 import student.Student;
+import studentmanagers.StudentManagers;
 
 
 public class Main {
@@ -34,7 +33,7 @@ public class Main {
 		Student std = new Student();
 		int stdNum = std.getStdNum();
 
-		StudentManagers sm = new StudentManagers();
+		ArrayList members = std.getMembers();
 
 		while(true) {
 			System.out.println("=== 학생 관리 시스템 === ");
@@ -47,30 +46,31 @@ public class Main {
 
 
 			int menu = InputValid(">>");
-			if(menu == 1) {
 
-				//학생 정보 입력
+			if(menu == 1) {	
+
 				System.out.print("학생 이름을 입력하세요. >> ");
 				String stdName = sc.nextLine();
-				System.out.print("학생 국어 성적을 입력하세요. >> ");
-				int korNum = Integer.parseInt(sc.nextLine());
-				System.out.print("학생 영어 성적을 입력하세요. >> ");
-				int engNum = Integer.parseInt(sc.nextLine());
-				System.out.print("학생 수학 성적을 입력하세요. >> ");
-				int mathNum = Integer.parseInt(sc.nextLine());
 
-				// Student의 배열에 학생 정보를 저장
-				sm.addMembers(new Student(stdNum++,stdName,korNum,engNum,mathNum));
+				int korNum = InputValid("학생 국어 성적을 입력하세요. >>");
+				int engNum = InputValid("학생 영어 성적을 입력하세요. >> ");
+				int mathNum = InputValid("학생 수학 성적을 입력하세요. >> ");
+
+				// StudentManagers의 Array배열에 저장
+				std.addMembers(new Student(stdNum++,stdName,korNum,engNum,mathNum));
 
 			}else if(menu ==2 ) {
 				//  학생 목록 출력
 
-				ArrayList members = sm.getMembers();
+
 				if(members.size() != 0) {
+
+					//정렬 == 아이디 순서로 다시 재배치 
 					System.out.println("=== 학생 정보 출력 ===");
 					System.out.print("학번"+"\t"+"이름"+"\t"+"국어"+"\t"+"영어"+"\t"+"수학"+"\t"+"합계"+"\t"+"평균");
-					for(int i =0; i < members.size()+1; i++) {
-					
+
+					for(int i =0; i < members.size(); i++) {
+
 						System.out.println();
 						System.out.print(
 								((Student)members.get(i)).getStdNum()+"\t"+
@@ -83,28 +83,49 @@ public class Main {
 					}
 
 					System.out.println();
+
 				}else {
 
 					System.out.println("출력할 정보가 없습니다.");
 				}
-			}else if (menu ==3 ) {
+
+			}else if (menu == 3 ) {
 				// 학생 정보 검색
 				int num =0;
 				System.out.print("검색할 이름을 입력하세요 : ");
 				String searchName = sc.nextLine(); 
-				ArrayList members = sm.getMembers();
-				if(members.size() == 0) { 	System.out.println("찾는 이름이 없습니다.");}
+
+				if(members.size() == 0) { System.out.println("찾는 이름이 없습니다.");}
+
+				System.out.print("학번"+"\t"+"이름"+"\t"+"국어"+"\t"+"영어"+"\t"+"수학"+"\t"+"합계"+"\t"+"평균");
+
 				for(int i=0; i < members.size(); i++) {
+
 					if(searchName.equals(((Student) members.get(i)).getStdName())) {
 						num++;
+						System.out.println();
+						System.out.print(
+								((Student)members.get(i)).getStdNum()+"\t"+
+										((Student)members.get(i)).getStdName()+"\t"+
+										((Student)members.get(i)).getKorNum()+"\t"+
+										((Student)members.get(i)).getEngNum()+"\t"+
+										((Student)members.get(i)).getMathNum()+"\t"+
+										((Student)members.get(i)).getSum()+"\t"+
+										((Student)members.get(i)).getAvg()+"\t");
 					}
 				}
-				System.out.println("총 " + num +"명 있습니다.");	
-			}else if(menu ==4 ) {
 
-				System.out.println("아이디를 입력하세요 : ");
-				int inputId = Integer.parseInt(sc.nextLine());
-				ArrayList members = sm.getMembers();
+
+
+
+				// 띄어쓰기
+				System.out.println();
+				// 총 합계 
+				System.out.println("총 " + num +"명 있습니다.");	
+			}else if(menu == 4 ) {
+
+				// ID 기반으로 입력
+				int inputId = InputValid("아이디를 입력하세요 >>");
 
 				for(int i =0; i < members.size(); i++) {
 					if(inputId == (((Student)members.get(i)).getStdNum())) {
@@ -117,11 +138,11 @@ public class Main {
 						System.out.print("수정 할 수학 점수를 입력하세요 :");
 						int newMath = Integer.parseInt(sc.nextLine());
 
-						sm.addMembers(new Student(inputId, newName,newKor,newEng,newMath));
+						std.addMembers(new Student(inputId, newName,newKor,newEng,newMath));
 						members.remove(i);
 						break;
 					}
-					//  ID 기반으로 전체 항목 재입력 
+
 
 				}
 
@@ -129,7 +150,6 @@ public class Main {
 				//학생 정보 삭제
 				System.out.println("아이디를 입력하세요 : ");
 				int removeId = Integer.parseInt(sc.nextLine());
-				ArrayList members = sm.getMembers();
 
 				for(int i =0; i < members.size(); i++) {
 					if(removeId == (((Student)members.get(i)).getStdNum())) {

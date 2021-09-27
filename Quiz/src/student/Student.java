@@ -1,8 +1,8 @@
 package student;
 
+import studentmanagers.StudentManagers;
 
-
-public class Student  {
+public class Student extends StudentManagers {
 	
 	// Data 클래스 ( 학생 한명의 정보를 저장) 
 	private int stdNum = 1001;
