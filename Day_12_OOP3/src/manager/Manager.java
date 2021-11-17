@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import grades.Gold;
 import grades.Grade;
-import grades.Silver;
+import grades.Sliver;
 
 public class Manager {
 	private ArrayList members = new ArrayList();

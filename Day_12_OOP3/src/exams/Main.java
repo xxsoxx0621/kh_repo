@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import grades.Gold;
 import grades.Grade;
-import grades.Silver;
+import grades.Sliver;
 import manager.Manager;
 
 
@@ -63,8 +63,8 @@ public class Main {
 
 
 				manager.addMember(new Gold(1001,"Tom",1000));
-				manager.addMember(new Silver(1002,"Jack",2000));
-				manager.addMember(new Silver(1003,"Susan",3000));
+				manager.addMember(new Sliver(1002,"Jack",2000));
+				manager.addMember(new Sliver(1003,"Susan",3000));
 				manager.addMember(new Gold(1005,"Jane",4000));
 
 

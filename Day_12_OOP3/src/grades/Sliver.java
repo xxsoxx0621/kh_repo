@@ -1,17 +1,20 @@
 package grades;
 
-public class Silver extends Grade {
+public class Sliver extends Grade {
 	
-	public Silver() {
+	public Sliver() {
 		
 	}
 	
-	public Silver(int id, String name, int point) {
+	public Sliver(int id, String name, int point) {
 		super(id,name,point);
 	}
+	
+	@Override
+	public double getBonus() {
+		return this.getPoint()*0.04;
+	}
 
-	
-	
 
 	//  - 실버등급 회원의 정보를 저장하기 위한 클래스
 	
