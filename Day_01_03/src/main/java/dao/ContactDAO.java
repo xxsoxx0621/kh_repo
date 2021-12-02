@@ -7,23 +7,56 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+
 import dto.ContactDTO;
 import servlets.Servlet01;
 
 public class ContactDAO {
 	
+//	private BasicDataSource bds = new BasicDataSource();
+	
+	private static ContactDAO instance = null;
+	public  static ContactDAO getInstance() {
+		if(instance == null) {
+			instance = new ContactDAO();
+		}
+		return instance;
+	}
+	public ContactDAO() {
+//		bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+//		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+//		bds.setUsername("kh");
+//		bds.setPassword("kh");
+//		bds.setInitialSize(30);
+	}
+	
+	// singleton 관련 코드 
+	
 	private Connection getConnection() throws Exception{
 		
-		// 데이터베이스 접속
-		String userName = "kh";
-		String passWord = "kh";
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			
-		// db dao 부분
-
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con =  DriverManager.getConnection(url,userName,passWord);
-			return con;
+		//JNDI 관련코드
+		Context ctx = new InitialContext();
+		
+		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle");
+		return ds.getConnection();
+//		return bds.getConnection();
+		
+		
+//		// 데이터베이스 접속
+//		String userName = "kh";
+//		String passWord = "kh";
+//		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//			
+//		// db dao 부분
+//
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			Connection con =  DriverManager.getConnection(url,userName,passWord);
+//			return con;
 	}
 		
 		public int insert(String name, String contact) throws Exception {

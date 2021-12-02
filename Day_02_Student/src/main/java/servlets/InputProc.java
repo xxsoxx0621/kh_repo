@@ -21,7 +21,7 @@ public class InputProc extends HttpServlet {
 		int korScore = Integer.parseInt(request.getParameter("kor"));
 		int engScore =  Integer.parseInt(request.getParameter("eng"));
 		
-		StudentDAO dao = new StudentDAO();
+		StudentDAO dao = StudentDAO.getInstance();
 		
 		try {
 			dao.insert(name, korScore, engScore);

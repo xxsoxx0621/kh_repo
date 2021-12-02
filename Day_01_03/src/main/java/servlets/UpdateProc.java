@@ -21,7 +21,7 @@ public class UpdateProc extends HttpServlet {
 		String contact = request.getParameter("updateContact");
 		int seq = Integer.parseInt(request.getParameter("target"));
 		
-		ContactDAO dao = new ContactDAO();
+		ContactDAO dao = ContactDAO.getInstance();
 		
 		try {
 			dao.update(name, contact, seq);

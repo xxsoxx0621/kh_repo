@@ -7,25 +7,45 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 
 import dto.StudentDTO;
 
 public class StudentDAO {
 	
+	
+	private static StudentDAO instance = null;
+	public static StudentDAO getInstance() {
+		if(instance == null) {
+			instance = new StudentDAO();
+		}
+		return instance;
+	}
+	
+	public StudentDAO() {}
 	private Connection getConnection() throws Exception {
 		
+		Context ctx = new InitialContext();
 		
-			String id = "Study";
-			String pw = "Study";
-			String url = "jdbc:oracle:thin:@localhost:1521:xe";
-			
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con = DriverManager.getConnection(url,id,pw);
-			
-			return con;
-		
-				
+		DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/oracle");
+		return ds.getConnection();
 	}
+//	private Connection getConnection() throws Exception {
+//		
+//		
+//			String id = "Study";
+//			String pw = "Study";
+//			String url = "jdbc:oracle:thin:@localhost:1521:xe";
+//			
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			Connection con = DriverManager.getConnection(url,id,pw);
+//			
+//			return con;
+//		
+//				
+//	}
 	
  	public int insert(String name, int kor, int eng ) throws Exception {
  		
@@ -51,7 +71,8 @@ public class StudentDAO {
  		try(Connection con = this.getConnection();
  				PreparedStatement pstat = con.prepareStatement(sql);
 				ResultSet rs = pstat.executeQuery();){
- 		// 동적배열
+ 	
+ 			// 동적배열
  					List<StudentDTO> list = new ArrayList<StudentDTO>();
  					
  						while(rs.next()) {

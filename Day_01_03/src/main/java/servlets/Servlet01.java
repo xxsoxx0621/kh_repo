@@ -22,15 +22,17 @@ public class Servlet01 extends HttpServlet {
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ContactDAO dao = new ContactDAO();
+		ContactDAO dao = ContactDAO.getInstance();
 		
 		// index.html에서 입력값 받아오기
 		String name = request.getParameter("name");
 		String contact = request.getParameter("contact");
 		
 		try {
-			dao.insert(name,contact);
-			response.sendRedirect("index.html");
+			int result = dao.insert(name,contact);
+			request.getRequestDispatcher("InputView.jsp").forward(request, response);
+			
+//			response.sendRedirect("InputView.jsp");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
